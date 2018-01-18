@@ -1,0 +1,59 @@
+# definições de um relatório
+
+# arquivo com variáveis shell que definem
+# a consulta SQL 
+
+# definições obrigatórias:
+
+# ARQUIVO
+# NOMES
+# CAMPOS
+# TABELAS
+# CONDICOES
+# ORDEM
+
+# cidade de referência (Itajaí/SC)
+
+ITJ_LAT=-26.91398
+ITJ_LON=-48.63606
+
+DISTANCIA_ITJ="round(st_distance(o.geog::geography, st_setsrid(st_point($ITJ_LON,$ITJ_LAT),4326)::geography) / 1850.0)"
+
+# cidade de referência (Rio Grande/RS)
+
+RG_LAT=-32.15943
+RG_LON=-52.08982
+
+DISTANCIA_RG="round(st_distance(o.geog::geography, st_setsrid(st_point($RG_LON,$RG_LAT),4326)::geography) / 1850.0)"
+
+# cidade de referência (Santos/SP)
+
+SP_LAT=-24.00895
+SP_LON=-46.35270
+
+DISTANCIA_SP="round(st_distance(o.geog::geography, st_setsrid(st_point($SP_LON,$SP_LAT),4326)::geography) / 1850.0)"
+
+# cidade de referência (Rio de Janeiro/RJ)
+
+RJ_LAT=-22.95675
+RJ_LON=-43.13822
+
+DISTANCIA_RJ="round(st_distance(o.geog::geography, st_setsrid(st_point($RJ_LON,$RJ_LAT),4326)::geography) / 1850.0)"
+
+# campos especiais
+
+LOCAL="coalesce(local_nome(o.geog), split_part(st_aslatlontext(o.geog, 'DD°C'), ' ',1)||' ('||func_area_nome(st_setsrid(o.geog,4326))||')')"
+
+DISTANCIA_REF="$DISTANCIA_RG, $DISTANCIA_ITJ, $DISTANCIA_SP, $DISTANCIA_RJ"
+
+DISTANCIA_COSTA="round((st_distance(o.geog::geography, d.geog::geography)/1850.0)::numeric,1)"
+
+# campos obrigatórios
+
+ARQUIVO="sem_preps.csv"
+
+NOMES="EMBARCAÇÃO, FROTA, DATA/HORA, LOCALIZAÇÃO, DISTÂNCIA DA COSTA, PROFUNDIDADE, VELOCIDADE, RUMO"
+CAMPOS="upper(r.nome_embarcacao), t.tipo, o.datahora, $LOCAL, $DISTANCIA_COSTA, func_prof(st_value(g.rast,o.geog)), o.veloc, o.direcao"
+TABELAS="onixsat o, gebco g, chave_onixsat c, raep_deferidas r, frotas t, costa_cartadhn d"
+CONDICOES="o.embarcacao = c.embarcacao and c.num_rgp = r.num_rgp and t.frota_num = r.frota_num and o.datahora < now() - '8 hours'::interval and o.datahora > now() - '3 day'::interval and o.latdec <= -18"
+ORDEM="3"

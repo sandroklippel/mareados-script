@@ -1,0 +1,236 @@
+# mapa com as diferentes modalidades de arrasto de fundo
+
+#
+# MAPA = nome do arquivo
+#
+
+MAPA='linha_superficie'
+
+rm -f ${MAPA}.pdf
+
+#
+# obtém os dados
+#
+#############################
+
+# espinhel de superfície (itaipava)
+
+psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
+from onixsat o, \
+chave_onixsat c, \
+raep_deferidas r, \
+portos p, \
+frotas t \
+where o.embarcacao = c.embarcacao and \
+c.num_rgp = r.num_rgp and \
+t.frota_num = r.frota_num and \
+t.tipo = 'espinhel de superfície (itaipava)' and o.veloc > 1 and \
+o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
+not st_covers(p.wkb_geometry,o.geog) and \
+o.datahora > now() - '1 day'::interval" > itaipava.gmt $BD
+
+psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
+from onixsat o, \
+chave_onixsat c, \
+raep_deferidas r, \
+portos p, \
+frotas t \
+where o.embarcacao = c.embarcacao and \
+c.num_rgp = r.num_rgp and \
+t.frota_num = r.frota_num and \
+t.tipo = 'espinhel de superfície (itaipava)' and o.veloc <= 1 and \
+o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
+not st_covers(p.wkb_geometry,o.geog) and \
+o.datahora > now() - '1 day'::interval" > itaipava0.gmt $BD
+
+# espinhel de superfície
+
+psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
+from onixsat o, \
+chave_onixsat c, \
+raep_deferidas r, \
+portos p, \
+frotas t \
+where o.embarcacao = c.embarcacao and \
+c.num_rgp = r.num_rgp and \
+t.frota_num = r.frota_num and \
+t.tipo = 'espinhel de superfície' and o.veloc > 1 and \
+o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
+not st_covers(p.wkb_geometry,o.geog) and \
+o.datahora > now() - '1 day'::interval" > espinheldesuperficie.gmt $BD
+
+psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
+from onixsat o, \
+chave_onixsat c, \
+raep_deferidas r, \
+portos p, \
+frotas t \
+where o.embarcacao = c.embarcacao and \
+c.num_rgp = r.num_rgp and \
+t.frota_num = r.frota_num and \
+t.tipo = 'espinhel de superfície' and o.veloc <= 1 and \
+o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
+not st_covers(p.wkb_geometry,o.geog) and \
+o.datahora > now() - '1 day'::interval" > espinheldesuperficie0.gmt $BD
+
+# vara e isca viva
+
+psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
+from onixsat o, \
+chave_onixsat c, \
+raep_deferidas r, \
+portos p, \
+frotas t \
+where o.embarcacao = c.embarcacao and \
+c.num_rgp = r.num_rgp and \
+t.frota_num = r.frota_num and \
+t.tipo = 'vara e isca viva' and o.veloc > 1 and \
+o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
+not st_covers(p.wkb_geometry,o.geog) and \
+o.datahora > now() - '1 day'::interval" > varaeiscaviva.gmt $BD
+
+psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
+from onixsat o, \
+chave_onixsat c, \
+raep_deferidas r, \
+portos p, \
+frotas t \
+where o.embarcacao = c.embarcacao and \
+c.num_rgp = r.num_rgp and \
+t.frota_num = r.frota_num and \
+t.tipo = 'vara e isca viva' and o.veloc <= 1 and \
+o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
+not st_covers(p.wkb_geometry,o.geog) and \
+o.datahora > now() - '1 day'::interval" > varaeiscaviva0.gmt $BD
+
+# linha
+
+psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
+from onixsat o, \
+chave_onixsat c, \
+raep_deferidas r, \
+portos p, \
+frotas t \
+where o.embarcacao = c.embarcacao and \
+c.num_rgp = r.num_rgp and \
+t.frota_num = r.frota_num and \
+t.tipo = 'linha' and o.veloc > 1 and \
+o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
+not st_covers(p.wkb_geometry,o.geog) and \
+o.datahora > now() - '1 day'::interval" > linha.gmt $BD
+
+psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
+from onixsat o, \
+chave_onixsat c, \
+raep_deferidas r, \
+portos p, \
+frotas t \
+where o.embarcacao = c.embarcacao and \
+c.num_rgp = r.num_rgp and \
+t.frota_num = r.frota_num and \
+t.tipo = 'linha' and o.veloc <= 1 and \
+o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
+not st_covers(p.wkb_geometry,o.geog) and \
+o.datahora > now() - '1 day'::interval" > linha0.gmt $BD
+
+# desenha mapa
+
+gmt pscoast -Y3c -X3.35c -P -N1/thinnest -N2/thinnest,black,. -Dh -Wthinnest -Glightgrey $REGIAO $PROJ -K > ${MAPA}.ps
+gmt psxy -P $PROF30 -Wthinnest,grey $REGIAO $PROJ -K -O -Sql$LAB:+l$ROT30+f6p,Helvetica,black >> ${MAPA}.ps
+gmt psxy -P $PROF50  -Wthinnest,grey $REGIAO $PROJ -K -O -Sql$LAB:+l$ROT50+f6p,Helvetica,black >> ${MAPA}.ps
+gmt psxy -P $PROF100  -Wthinnest,grey $REGIAO $PROJ -K -O -Sql$LAB:+l$ROT100+f6p,Helvetica,black >> ${MAPA}.ps
+gmt psxy -P $PROF200  -Wthinnest,grey $REGIAO $PROJ -K -O -Sql$LAB:+l$ROT200+f6p,Helvetica,black >> ${MAPA}.ps
+gmt psxy -P $PROF1000  -Wthinnest,grey $REGIAO $PROJ -K -O -Sql$LAB:+l$ROT1000+f6p,Helvetica,black >> ${MAPA}.ps
+gmt psbasemap -P $REGIAO $PROJ $ANOT -BWesN $ESCALA -K -O >> ${MAPA}.ps
+
+# espinhel de superfície (itaipava) VERMELHO
+
+if [[ -s itaipava.gmt ]]; then
+	gmt psxy -P itaipava.gmt $REGIAO $PROJ -S=0.05i+e+je -Wthin,red,solid -Gred -K -O >> ${MAPA}.ps
+fi
+
+if [[ -s itaipava0.gmt ]]; then
+	gmt psxy -P itaipava0.gmt $REGIAO $PROJ $ZEROVELOC -Wthin,red,solid -Gred -K -O >> ${MAPA}.ps
+fi
+
+# espinhel de superfície VERDE
+
+if [[ -s espinheldesuperficie.gmt ]]; then
+	gmt psxy -P espinheldesuperficie.gmt $REGIAO $PROJ -S=0.05i+e+je+n2 -Wthin,green,solid -Ggreen -K -O >> ${MAPA}.ps
+fi
+
+if [[ -s espinheldesuperficie0.gmt ]]; then
+	gmt psxy -P espinheldesuperficie0.gmt $REGIAO $PROJ $ZEROVELOC -Wthin,green,solid -Ggreen -K -O >> ${MAPA}.ps
+fi
+
+# vara e isca viva AZUL
+
+if [[ -s varaeiscaviva.gmt ]]; then
+	gmt psxy -P varaeiscaviva.gmt $REGIAO $PROJ -S=0.05i+e+je -Wthin,blue,solid -Gblue -K -O >> ${MAPA}.ps
+fi
+
+if [[ -s varaeiscaviva0.gmt ]]; then
+	gmt psxy -P varaeiscaviva0.gmt $REGIAO $PROJ $ZEROVELOC -Wthin,blue,solid -Gblue -K -O >> ${MAPA}.ps
+fi
+
+# linha LARANJA
+
+if [[ -s linha.gmt ]]; then
+	gmt psxy -P linha.gmt $REGIAO $PROJ -S=0.05i+e+je+n2 -Wthin,orange,solid -Gorange -K -O >> ${MAPA}.ps
+fi
+
+if [[ -s linha0.gmt ]]; then
+	gmt psxy -P linha0.gmt $REGIAO $PROJ $ZEROVELOC -Wthin,orange,solid -Gorange -K -O >> ${MAPA}.ps
+fi
+
+# data/hora do rastreamento
+
+echo "$LOCDATA Rastreamento em $DATAHORA" | gmt pstext -P $REGIAO $PROJ -D0/-2 -N -F+f11p,Helvetica+jRT -K -O >> ${MAPA}.ps
+
+# cidade de referência
+
+echo "$LOCREF" | gmt pstext -P $REGIAO $PROJ -F+f16p,Helvetica+jRT -D-0.2c/0 -K -O >> ${MAPA}.ps
+
+# logo ibama
+
+gmt psimage IBAMA.png -Dx${POSLOGO}+w2c -K -O >> ${MAPA}.ps
+
+
+# cabeçalho da pagina (RETIRADO: Escrit\363rio Regional de Itaja\355)
+
+echo "$CAB1" | gmt pstext -P $REGIAO $PROJ -F+f10p,Helvetica+jCT -N -D-0.2c/0 -K -O >> ${MAPA}.ps
+echo "$CAB2" | gmt pstext -P $REGIAO $PROJ -F+f10p,Helvetica+jCT -N -D-0.2c/0 -K -O >> ${MAPA}.ps
+echo "$CAB3" | gmt pstext -P $REGIAO $PROJ -F+f10p,Helvetica+jCT -N -D-0.2c/0 -K -O >> ${MAPA}.ps
+
+# # Título
+
+# gmt pstext -P $REGIAO $PROJ -F+f12p,Helvetica-Bold+jCT -N -D-0.2c/0 -K -O <<EOF >> ${MAPA}.ps
+# -49 -23.95 MONITORAMENTO DE EMBARCA\307\325ES PESQUEIRAS
+# EOF
+
+# legenda
+
+gmt pslegend -P -Dx${POSLEG}+w10c -O <<EOF >> ${MAPA}.ps
+# Legend test for pslegend
+# G is vertical gap, V is vertical line, N sets # of columns, D draws horizontal line.
+# H is header, L is label, S is symbol, T is paragraph text, M is map scale.
+#
+S 0.5c v0.05i 0.20i red thin,red 1c espinhel de superf\355cie (itaipava)
+S 0.5c v0.05i 0.20i green thin,green 1c espinhel de superf\355cie
+S 0.5c v0.05i 0.20i blue thin,blue 1c vara e isca viva
+S 0.5c v0.05i 0.20i orange thin,orange 1c linha
+EOF
+
+# remove arquivos
+
+rm -f itaipava.gmt espinheldesuperficie.gmt varaeiscaviva.gmt linha.gmt
+rm -f itaipava0.gmt espinheldesuperficie0.gmt varaeiscaviva0.gmt linha0.gmt
+
+# converte para PDF
+########################################
+
+# gmt psconvert -Z -A0.1 -Tf ${MAPA}.ps
+
+ps2pdf ${MAPA}.ps
+
+rm -f ${MAPA}.ps
