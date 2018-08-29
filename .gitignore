@@ -1,0 +1,5 @@
+*.txt
+*.dump
+*.conf
+*.history
+.vscode
