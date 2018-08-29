@@ -2,32 +2,16 @@
 
 # arquivos com resultados
 
-ARQ_SUL="mareados.ods \
+ARQUIVOS="mareados.ods \
          mapas_rs.pdf \
          mapas_scpr.pdf \
          mapas_rj.pdf \
          mapas_sp.pdf \
          mapas_es.pdf"
 
-# configurações para envio do email MAREADOS SUL
-
-#IBAMA_SC="sandro.klippel@ibama.gov.br,Paulo.Maues-Filho@ibama.gov.br,polli.ibama@gmail.com,jdobessa@gmail.com,e.nuber@gmail.com,annik.ibama@gmail.com,marcio.burgonovo@ibama.gov.br,leonardotomaz@live.com"
-#IBAMA_RS="fisc.rs@ibama.gov.br,daniela.gelain@ibama.gov.br,jairo.nogueira@ibama.gov.br,cristiano.souza@ibama.gov.br"
-#IBAMA_BSB="coinf.sede@ibama.gov.br,nupes.cofis.sede@ibama.gov.br"
-
-#EMAILS_SUL=`psql -A -t --field-separator=","  --record-separator="," --command="select email from emails" mareados`
-#EMAILS_SUL="$IBAMA_RS,$IBAMA_SC,$IBAMA_BSB"
-#EMAILS_SUL="sandro.klippel@ibama.gov.br"
-
-#SERVIDOR="-S smtp=10.10.2.2 -S smtp-auth-user=mareados.sul.sc -S smtp-auth-password=mareados.sul3421"
-
-#ANEXOS_SUL=`for i in $ARQ_SUL; do echo -n "-a $i "; done`
-
 # localização do arquivo WatercraftTracking.csv
 
-# ONIXSAT="/Users/sandroklippel/Downloads/WatercraftTracking.csv"
 ONIXSAT="/home/mareados/Downloads/WatercraftTracking.csv"
-#ONIXSAT="/home/sandro/Downloads/WatercraftTracking.csv"
 
 # nome do banco de dados PostGIS
 
@@ -101,7 +85,7 @@ bateria from temporario where latitude is not null and longitude is not null and
 
 alter table onixsat add column id serial primary key;
 
-grant select on onixsat to mareados_sul;
+grant select on onixsat to qgis;
 
 drop table if exists temporario;
 EOF
@@ -147,13 +131,7 @@ echo ""
 
 ./mapas_es.sh
 
-#echo ""
-#echo "  envia por e-mail (MAREADOS SUL)"
-#echo ""
-
 DATAHORA=`cat datahora.txt`
-
-#echo "Rastreamento em $DATAHORA" | mailx -r "mareados.sul.sc@ibama.gov.br" -s "MAREADOS SUL $DATAHORA" $SERVIDOR $ANEXOS_SUL $EMAILS_SUL
 
 echo ""
 echo "  move arquivos para a pasta Boletins_enviados"
@@ -162,8 +140,8 @@ echo ""
 DIRETORIO=`cat datahora.txt | tr '/ :' '_'`
 mkdir "/home/mareados/Documentos/Boletins_enviados/$DIRETORIO"
 
-# arquivos mareados sul
+# arquivos mareados
 
-for i in $ARQ_SUL; do
+for i in $ARQUIVOS; do
  	mv $i "/home/mareados/Documentos/Boletins_enviados/$DIRETORIO"
 done
