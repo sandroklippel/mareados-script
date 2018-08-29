@@ -1,10 +1,0 @@
-# GMT 5 Session common arguments shelf
-BEGIN GMT 5.2.1
-B	afWesN
-J	Y
-JY	Y-41.0/0.0/15
-R	-43/-39/-23.25/-18
-X	3.35c
-Y	3c
-L	21
-END
