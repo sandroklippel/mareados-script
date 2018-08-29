@@ -87,7 +87,7 @@ bateria from temporario where latitude is not null and longitude is not null and
 
 alter table onixsat add column id serial primary key;
 
-grant select on onixsat to mareados_sul;
+grant select on onixsat to qgis;
 
 drop table if exists temporario;
 EOF
