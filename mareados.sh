@@ -137,7 +137,7 @@ echo ""
 echo "  move arquivos para a pasta Boletins_enviados"
 echo ""
 
-DIRETORIO=`cat datahora.txt | tr '/ :' '_'`
+DIRETORIO=`cat datahora.txt | tr '/ :' '_' | awk -F "_" '{printf "%s-%s-%s_%s%s",$3,$2,$1,$4,$5}'`
 mkdir "/home/mareados/Documentos/Boletins_enviados/$DIRETORIO"
 
 # arquivos mareados
