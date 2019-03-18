@@ -37,16 +37,16 @@ echo ""
 # muda diretório atual
 cd /home/mareados/Documentos/script
 
-# remove as cinco primeiras linhas do arquivo WatercraftTracking
-tail -n +5 $ONIXSAT  > /var/tmp/processa.csv
+# remove as quatro primeiras linhas do arquivo WatercraftTracking (modificado NEWPREPS)
+tail -n +4 $ONIXSAT  > /var/tmp/processa.csv
 
-# extrai a data e hora dos dados de rastreamento
-head -n 4 $ONIXSAT | awk -F ";" '/Data/ {print $4}' > datahora.txt
+# extrai a data e hora dos dados de rastreamento (modificado NEWPREPS)
+head -n 3 $ONIXSAT | awk -F ";" '/Data/ {print $4}' > datahora.txt
 
 # remove arquivo WatercraftTracking
 rm -f $ONIXSAT
 
-# carrega os dados para o BD e pré-processa os dados
+# carrega os dados para o BD e pré-processa os dados (modificado NEWPREPS)
 psql $BD &> /dev/null <<EOF
 drop table if exists temporario;
 
@@ -54,18 +54,22 @@ create table temporario
 (
 	embarcacao varchar,
 	dummy1 varchar,
-	datahora varchar,
 	dummy2 varchar,
+	dummy3 varchar,
+	datahora varchar,
 	latitude varchar,
 	longitude varchar,
-	dummy3 varchar,
+	dummy4 varchar,
+	dummy5 varchar,
+	dummy6 varchar,
+	dummy7 varchar,
 	velocidade varchar,
 	direcao varchar,
+	dummy8 varchar,
 	status varchar,
 	bateria varchar,
 	categoria varchar,
-	dummy4 varchar,
-	dummy5 varchar,
+	dummy9 varchar,
 	msg varchar,
 	situacao varchar
 );
