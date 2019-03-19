@@ -9,7 +9,9 @@ arquivos = ['monitorando.csv',
             'nomar_sp.csv',
             'nomar_rj.csv',
             'nomar_es.csv',
-            'sem_preps.csv']
+            'sem_preps.csv',
+            'sem_rgp.csv',
+            'sem_chave.csv']
 
 nomes = ['monitoramento',
          'porto',
@@ -18,7 +20,9 @@ nomes = ['monitoramento',
          'SP',
          'RJ',
          'ES',
-         'desligou preps']
+         'desligou preps',
+         'sem RGP',
+         'sem chave onixsat']
 
 data = Databook()
 
