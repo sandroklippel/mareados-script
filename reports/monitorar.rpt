@@ -52,6 +52,6 @@ ARQUIVO="monitorando.csv"
 
 NOMES="EMBARCAÇÃO, FROTA, INDICATIVO, DATA/HORA, LOCALIZAÇÃO, PROFUNDIDADE, VELOCIDADE, RUMO, DISTÂNCIA DE RIO GRANDE, DISTÂNCIA DE ITAJAÍ, DISTÂNCIA DE SANTOS, DISTÂNCIA DO RJ"
 CAMPOS="upper(r.nome_embarcacao), t.tipo, replace(m.motivo,',',';'), o.datahora, $LOCAL, func_prof(st_value(g.rast,o.geog)), o.veloc, o.direcao, $DISTANCIA_REF"
-TABELAS="onixsat o, gebco g, chave_onixsat c, raep_deferidas r, frotas t, monitorar m"
-CONDICOES="o.embarcacao = c.embarcacao and c.num_rgp = r.num_rgp and r.num_rgp = m.num_rgp and t.frota_num = r.frota_num and m.finalizado = 'N'"
+TABELAS="onixsat o, gebco g, nova_chave_onixsat c, raep_deferidas r, frotas t, monitorar m"
+CONDICOES="o.embarcacao = c.embarcacao and c.num_marinha = r.num_marinha and r.num_rgp = m.num_rgp and t.frota_num = r.frota_num and m.finalizado = 'N'"
 ORDEM="1"

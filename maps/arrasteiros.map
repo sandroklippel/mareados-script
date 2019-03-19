@@ -17,12 +17,12 @@ rm -f ${MAPA}.pdf
 
 psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
 from onixsat o, \
-chave_onixsat c, \
+nova_chave_onixsat c, \
 raep_deferidas r, \
 portos p, \
 frotas t \
 where o.embarcacao = c.embarcacao and \
-c.num_rgp = r.num_rgp and \
+c.num_marinha = r.num_marinha and \
 t.frota_num = r.frota_num and \
 t.tipo = 'arrasto de fundo oceânico' and o.veloc > 1 and \
 o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
@@ -31,12 +31,12 @@ o.datahora > now() - '1 day'::interval" > arrasto_oceanico.gmt $BD
 
 psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
 from onixsat o, \
-chave_onixsat c, \
+nova_chave_onixsat c, \
 raep_deferidas r, \
 portos p, \
 frotas t \
 where o.embarcacao = c.embarcacao and \
-c.num_rgp = r.num_rgp and \
+c.num_marinha = r.num_marinha and \
 t.frota_num = r.frota_num and \
 t.tipo = 'arrasto de fundo oceânico' and o.veloc <= 1 and \
 o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
@@ -47,12 +47,12 @@ o.datahora > now() - '1 day'::interval" > arrasto_oceanico0.gmt $BD
 
 psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
 from onixsat o, \
-chave_onixsat c, \
+nova_chave_onixsat c, \
 raep_deferidas r, \
 portos p, \
 frotas t \
 where o.embarcacao = c.embarcacao and \
-c.num_rgp = r.num_rgp and \
+c.num_marinha = r.num_marinha and \
 t.frota_num = r.frota_num and \
 t.tipo = 'arrasto de fundo peixes' and o.veloc > 1 and \
 o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
@@ -61,12 +61,12 @@ o.datahora > now() - '1 day'::interval" > arrasto_peixes.gmt $BD
 
 psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
 from onixsat o, \
-chave_onixsat c, \
+nova_chave_onixsat c, \
 raep_deferidas r, \
 portos p, \
 frotas t \
 where o.embarcacao = c.embarcacao and \
-c.num_rgp = r.num_rgp and \
+c.num_marinha = r.num_marinha and \
 t.frota_num = r.frota_num and \
 t.tipo = 'arrasto de fundo peixes' and o.veloc <= 1 and \
 o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
@@ -77,12 +77,12 @@ o.datahora > now() - '1 day'::interval" > arrasto_peixes0.gmt $BD
 
 psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
 from onixsat o, \
-chave_onixsat c, \
+nova_chave_onixsat c, \
 raep_deferidas r, \
 portos p, \
 frotas t \
 where o.embarcacao = c.embarcacao and \
-c.num_rgp = r.num_rgp and \
+c.num_marinha = r.num_marinha and \
 t.frota_num = r.frota_num and \
 t.tipo = 'arrasto de fundo duplo peixes' and o.veloc > 1 and \
 o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
@@ -91,12 +91,12 @@ o.datahora > now() - '1 day'::interval" > arrasto_duplo_peixes.gmt $BD
 
 psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
 from onixsat o, \
-chave_onixsat c, \
+nova_chave_onixsat c, \
 raep_deferidas r, \
 portos p, \
 frotas t \
 where o.embarcacao = c.embarcacao and \
-c.num_rgp = r.num_rgp and \
+c.num_marinha = r.num_marinha and \
 t.frota_num = r.frota_num and \
 t.tipo = 'arrasto de fundo duplo peixes' and o.veloc <= 1 and \
 o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
@@ -107,12 +107,12 @@ o.datahora > now() - '1 day'::interval" > arrasto_duplo_peixes0.gmt $BD
 
 psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
 from onixsat o, \
-chave_onixsat c, \
+nova_chave_onixsat c, \
 raep_deferidas r, \
 portos p, \
 frotas t \
 where o.embarcacao = c.embarcacao and \
-c.num_rgp = r.num_rgp and \
+c.num_marinha = r.num_marinha and \
 t.frota_num = r.frota_num and \
 t.tipo = 'arrasto duplo rosa e cristalino' and o.veloc > 1 and \
 o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
@@ -121,12 +121,12 @@ o.datahora > now() - '1 day'::interval" > arrasto_rosa.gmt $BD
 
 psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
 from onixsat o, \
-chave_onixsat c, \
+nova_chave_onixsat c, \
 raep_deferidas r, \
 portos p, \
 frotas t \
 where o.embarcacao = c.embarcacao and \
-c.num_rgp = r.num_rgp and \
+c.num_marinha = r.num_marinha and \
 t.frota_num = r.frota_num and \
 t.tipo = 'arrasto duplo rosa e cristalino' and o.veloc <= 1 and \
 o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
@@ -137,12 +137,12 @@ o.datahora > now() - '1 day'::interval" > arrasto_rosa0.gmt $BD
 
 psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
 from onixsat o, \
-chave_onixsat c, \
+nova_chave_onixsat c, \
 raep_deferidas r, \
 portos p, \
 frotas t \
 where o.embarcacao = c.embarcacao and \
-c.num_rgp = r.num_rgp and \
+c.num_marinha = r.num_marinha and \
 t.frota_num = r.frota_num and \
 t.tipo = 'arrasto duplo sete-barbas' and o.veloc > 1 and \
 o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \
@@ -151,12 +151,12 @@ o.datahora > now() - '1 day'::interval" > arrasto_setebarbas.gmt $BD
 
 psql -F ' ' -A -t -c "select round(o.londec::numeric,5), round(o.latdec::numeric,5), o.direcao, o.veloc * 1.85\
 from onixsat o, \
-chave_onixsat c, \
+nova_chave_onixsat c, \
 raep_deferidas r, \
 portos p, \
 frotas t \
 where o.embarcacao = c.embarcacao and \
-c.num_rgp = r.num_rgp and \
+c.num_marinha = r.num_marinha and \
 t.frota_num = r.frota_num and \
 t.tipo = 'arrasto duplo sete-barbas' and o.veloc <= 1 and \
 o.latdec <= $NORTE and o.latdec >= $SUL and o.londec <= $LESTE and o.londec >= $OESTE and \

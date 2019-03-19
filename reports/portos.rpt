@@ -19,6 +19,6 @@ ARQUIVO="portos.csv"
 NOMES="PORTO, LOCAL, FROTA, EMBARCAÇÃO, DATA/HORA, POSIÇÃO"
 
 CAMPOS="cidade_nome(o.geog), local_nome(o.geog), t.tipo, upper(r.nome_embarcacao), o.datahora, st_aslatlontext(o.geog, 'DD°MM.MM''C')"
-TABELAS="onixsat o, portos p, chave_onixsat c, raep_deferidas r, frotas t" 
-CONDICOES="o.embarcacao = c.embarcacao and c.num_rgp = r.num_rgp and t.frota_num = r.frota_num and o.datahora > now() - '1 day'::interval and st_covers(p.wkb_geometry,o.geog)" 
+TABELAS="onixsat o, portos p, nova_chave_onixsat c, raep_deferidas r, frotas t" 
+CONDICOES="o.embarcacao = c.embarcacao and c.num_marinha = r.num_marinha and t.frota_num = r.frota_num and o.datahora > now() - '1 day'::interval and st_covers(p.wkb_geometry,o.geog)" 
 ORDEM="1,3,4"

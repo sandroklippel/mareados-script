@@ -18,6 +18,6 @@ ARQUIVO="nomar_sp.csv"
 NOMES="EMBARCAÇÃO, DISTÂNCIA DE SANTOS, NORTE/SUL, DISTÂNCIA DA COSTA, PROFUNDIDADE, VELOCIDADE, RUMO, FROTA"
 
 CAMPOS="upper(r.nome_embarcacao), $DISTANCIA_REF, $POSICAO_REF, $DISTANCIA_COSTA, func_prof(st_value(g.rast,o.geog)), o.veloc, o.direcao, t.tipo"
-TABELAS="onixsat o, costa_cartadhn a, gebco g, chave_onixsat c, raep_deferidas r, frotas t, portos p, areas_zee_sudeste_sul z"
-CONDICOES="o.embarcacao = c.embarcacao and c.num_rgp = r.num_rgp and t.frota_num = r.frota_num and o.datahora > now() - '1 day'::interval and not st_covers(p.wkb_geometry,o.geog) and z.gid = 4 and o.geog && z.geom"
+TABELAS="onixsat o, costa_cartadhn a, gebco g, nova_chave_onixsat c, raep_deferidas r, frotas t, portos p, areas_zee_sudeste_sul z"
+CONDICOES="o.embarcacao = c.embarcacao and c.num_marinha = r.num_marinha and t.frota_num = r.frota_num and o.datahora > now() - '1 day'::interval and not st_covers(p.wkb_geometry,o.geog) and z.gid = 4 and o.geog && z.geom"
 ORDEM="3,8,2"
